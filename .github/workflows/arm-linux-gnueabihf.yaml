@@ -126,6 +126,7 @@ jobs:
           sudo apt-get install python3 git-lfs
           python3 -m pip install cmake
           cmake --version
+          python3 -m pip install flatbuffers
 
       - name: apply patch
         shell: bash
