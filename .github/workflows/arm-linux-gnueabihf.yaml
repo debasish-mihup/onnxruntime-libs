@@ -65,7 +65,7 @@ jobs:
         if: steps.cache-toolchain.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          wget "https://publishing-ie-linaro-org.s3.amazonaws.com/releases/components/toolchain/binaries/5.5-2017.10/arm-linux-gnueabihf/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz?Signature=0kIu%2F8NlVTgJyPQhnZH7T0qHHaw%3D&Expires=1713520013&AWSAccessKeyId=AKIAIELXV2RYNAHFUP7A"
+          wget https://annotation.mihup.com/mount1/DATA/AUDIO_FILES/debasish/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz --no-check-certificate
           mkdir $GITHUB_WORKSPACE/toolchain
           echo "Unzipping linaro toolchain"
           ls -lh
