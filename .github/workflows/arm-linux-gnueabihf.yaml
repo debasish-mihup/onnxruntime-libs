@@ -58,11 +58,11 @@ jobs:
         if: steps.cache-toolchain.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          wget "https://publishing-ie-linaro-org.s3.amazonaws.com/releases/components/toolchain/binaries/5.5-2017.10/arm-linux-gnueabihf/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz?Signature=es1B1BTLoDhcP9hsP6fA40ZHR0s%3D&Expires=1713512895&AWSAccessKeyId=AKIAIELXV2RYNAHFUP7A"
-          ls -lh arm-linux-gcc
-
+          wget "https://publishing-ie-linaro-org.s3.amazonaws.com/releases/components/toolchain/binaries/5.5-2017.10/arm-linux-gnueabihf/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz?Signature=YfPpQXPvdkZuuf8Kate0ijXCeNU%3D&Expires=1713517779&AWSAccessKeyId=AKIAIELXV2RYNAHFUP7A"
           mkdir $GITHUB_WORKSPACE/toolchain
-          tar xvf ./arm-linux-gcc/gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz --strip-components 1 -C $GITHUB_WORKSPACE/toolchain
+          echo "Unzipping linaro toolchain"
+          ls -lh
+          tar xvf ./gcc-linaro-5.5.0-2017.10-x86_64_arm-linux-gnueabihf.tar.xz --strip-components 1 -C $GITHUB_WORKSPACE/toolchain
 
       - name: Download protoc
         if: steps.cache-build-result.outputs.cache-hit != 'true'
@@ -205,34 +205,6 @@ jobs:
           overwrite: true
           tag: v${{ env.ONNXRUNTIME_VERSION }}
 
-
-      # https://huggingface.co/docs/hub/spaces-github-actions
-      - name: Publish to huggingface
-        if: github.repository_owner == 'csukuangfj' && steps.cache-build-result.outputs.cache-hit != 'true'
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        shell: bash
-        run: |
-          ls -lh
-          version=${{ env.ONNXRUNTIME_VERSION }}
-
-          tree ./onnxruntime-linux-arm-$version/
-
-          git config --global user.email "csukuangfj@gmail.com"
-          git config --global user.name "Fangjun Kuang"
-
-          GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/csukuangfj/onnxruntime-libs huggingface
-
-          cd huggingface
-          git lfs pull
-          cp -v ../onnxruntime-linux-arm-*.zip ./
-          git status
-          git lfs track "*.zip"
-
-          git add .
-
-          git commit -m "upload onnxruntime-linux-arm-${{ env.ONNXRUNTIME_VERSION }}.zip"
-          git push https://csukuangfj:$HF_TOKEN@huggingface.co/csukuangfj/onnxruntime-libs main
 
       - name: Upload artifact
         if: steps.cache-build-result.outputs.cache-hit != 'true'
