@@ -32,8 +32,8 @@ jobs:
         id: cache-build-result
         uses: actions/cache@v2
         with:
-          path: onnxruntime-linux-x64-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
-          key: onnxruntime-linux-x64-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}-cache-v1
+          path: onnxruntime-linux-arm-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
+          key: onnxruntime-linux-arm-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}-cache-v1
 
       - name: Checkout v${{ env.ONNXRUNTIME_VERSION }}
         if: steps.cache-build-result.outputs.cache-hit != 'true'
@@ -106,7 +106,7 @@ jobs:
 
           version=${{ env.ONNXRUNTIME_VERSION }}
           config=${{ matrix.config }}
-          artifact=onnxruntime-linux-x64-glibc2_17-$config-$version
+          artifact=onnxruntime-linux-arm-glibc2_17-$config-$version
 
           tag=$(git rev-parse HEAD)
           echo "tag: $tag"
@@ -128,8 +128,8 @@ jobs:
         if: steps.cache-build-result.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: onnxruntime-linux-x64-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
-          path: onnxruntime-linux-x64-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
+          name: onnxruntime-linux-arm-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
+          path: onnxruntime-linux-arm-glibc2_17-${{ matrix.config }}-${{ env.ONNXRUNTIME_VERSION }}
 
       - name: Upload v${{ env.ONNXRUNTIME_VERSION }}
         if: steps.cache-build-result.outputs.cache-hit != 'true'
@@ -150,7 +150,7 @@ jobs:
           ls -lh
           version=${{ env.ONNXRUNTIME_VERSION }}
           config=${{ matrix.config }}
-          artifact=onnxruntime-linux-x64-glibc2_17-$config-$version
+          artifact=onnxruntime-linux-arm-glibc2_17-$config-$version
 
           tree ./$artifact
 
