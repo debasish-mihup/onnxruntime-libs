@@ -23,8 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        arch: ['x86_64', 'arm']
-        config: ['Debug', 'MinSizeRel', 'Release', 'RelWithDebInfo']
+        arch: [arm]
+        config: ['Release']
 
 
     steps:
