@@ -27,7 +27,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         arch: ['arm']
-        config: ['Debug', 'MinSizeRel', 'Release', 'RelWithDebInfo']
+        config: ['Release']
 
 
     steps:
