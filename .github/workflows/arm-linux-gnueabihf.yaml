@@ -55,8 +55,7 @@ jobs:
         if: steps.cache-toolchain.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          git lfs install
-          git clone https://annotation.mihup.com/mount1/DATA/AUDIO_FILES/debasish/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf.tar.xz
+          wget https://annotation.mihup.com/mount1/DATA/AUDIO_FILES/debasish/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf.tar.xz --no-check-certificate
           ls -lh
 
           mkdir $GITHUB_WORKSPACE/toolchain
