@@ -112,7 +112,7 @@ jobs:
         if: steps.cache-build-result.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          sudo apt-get update
+          sudo apt-get update --allow-unauthenticated --allow-insecure-repositories
           sudo apt-get install python3 git-lfs
           python3 -m pip install cmake
           cmake --version
