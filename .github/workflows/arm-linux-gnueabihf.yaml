@@ -117,12 +117,12 @@ jobs:
           python3 -m pip install cmake
           cmake --version
 
-      - name: apply patch
-        shell: bash
-        run: |
-          cd tools/ci_build
-          sed -i.bak s/-fcf-protection// ./build.py
-          git diff
+      # - name: apply patch
+      #   shell: bash
+      #   run: |
+      #     cd tools/ci_build
+      #     sed -i.bak s/-fcf-protection// ./build.py
+      #     git diff
 
       - name: Build onnxruntime for 32-bit ARM
         if: steps.cache-build-result.outputs.cache-hit != 'true'
